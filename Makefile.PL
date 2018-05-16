@@ -24,16 +24,44 @@
 ##  OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 ##  SUCH DAMAGE.
 ##
-##  uuid.tm: Perl XS typemap for xsubpp(1)
+##  Makefile.PL: top-level Perl ExtUtils::MakeMaker wrapper script
 ##
 
-TYPEMAP
-uuid_t *        T_PTRREF
-uuid_t **       T_PTRREF
-uuid_rc_t       T_IV
-uuid_fmt_t      T_IV
-int *           T_PV
-size_t *        T_PV
-const void *    T_PV
-void **         T_PV
+require 5.008;
+use IO::File;
+
+my $ARGS = join(" ", @ARGV);
+
+print "++ writing Makefile\n";
+
+my $mk = new IO::File ">Makefile" or die;
+$mk->print(<< "EOF");
+
+PERL     = $^X
+FULLPERL = $^X
+ARGS     = $ARGS
+
+all pure_all:
+	\@if [ ! -d build ]; then mkdir build; fi
+	\@if [ ! -f build/Makefile ]; then (cd build && ../configure --disable-shared); fi
+	\@if [ ! -f build/libuuid.la ]; then (cd build && \$(MAKE) \$(MFLAGS) libuuid.la); fi
+	\@if [ ! -f perl/Makefile ]; then (cd perl && \$(PERL) Makefile.PL \$(ARGS)); fi
+	\@cd perl && \$(MAKE) \$(MFLAGS) \$\@
+
+install pure_install test:
+	\@cd perl && \$(MAKE) \$(MFLAGS) \$\@
+
+clean:
+	\@cd build && \$(MAKE) \$(MFLAGS) \$\@
+	\@cd perl && \$(MAKE) \$(MFLAGS) \$\@
+
+distclean realclean:
+	\@cd build && \$(MAKE) \$(MFLAGS) \$\@
+	\@cd perl && \$(MAKE) \$(MFLAGS) \$\@
+	-rm -rf build || true
+	-rm -rf Makefile || true
+
+EOF
+
+$mk->close();
 
