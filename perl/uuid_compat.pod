@@ -46,8 +46,10 @@ B<OSSP::uuid>.
 
 =head1 HISTORY
 
-The backward compatibility Perl binding B<Data::UUID> for B<OSSP uuid>
-was implemented in 2004 by Piotr Roszatycki E<lt>dexter@debian.orgE<gt>.
+The backward compatibility Perl binding B<Data::UUID> for B<OSSP
+uuid> was originally implemented in 2004 by Piotr Roszatycki
+E<lt>dexter@debian.orgE<gt>. It was later cleaned up and speed optimized
+in December 2005 by David Wheeler E<lt>david@justatheory.comE<gt>.
 
 =cut
 

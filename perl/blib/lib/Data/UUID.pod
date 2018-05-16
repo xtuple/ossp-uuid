@@ -24,7 +24,7 @@
 ##  OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 ##  SUCH DAMAGE.
 ##
-##  compat.pod: Backward Compatibility Perl Binding (Perl/POD part)
+##  uuid_compat.pod: Data::UUID Backward Compatibility Perl API (Perl/POD part)
 ##
 
 =pod
@@ -37,7 +37,7 @@ Data::UUID - B<OSSP uuid> Backward Compatibility Perl Binding
 
 B<Data::UUID> is the B<OSSP uuid> backward compatibility Perl binding
 to the API of the original B<Data::UUID> module. It allows other
-B<Data::UUID> based Perl modules to run with B<OSSP::uuid> without any
+B<Data::UUID> based Perl modules to run with B<OSSP::uuid> without
 changes.
 
 =head1 SEE ALSO
@@ -46,8 +46,10 @@ B<OSSP::uuid>.
 
 =head1 HISTORY
 
-The backward compatibility Perl binding B<Data::UUID> for B<OSSP uuid>
-was implemented in 2004 by Piotr Roszatycki E<lt>dexter@debian.orgE<gt>.
+The backward compatibility Perl binding B<Data::UUID> for B<OSSP
+uuid> was originally implemented in 2004 by Piotr Roszatycki
+E<lt>dexter@debian.orgE<gt>. It was later cleaned up and speed optimized
+in December 2005 by David Wheeler E<lt>david@justatheory.comE<gt>.
 
 =cut
 

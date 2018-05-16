@@ -35,14 +35,14 @@ use warnings;
 use strict;
 
 use OSSP::uuid;
-use MIME::Base64;
+use MIME::Base64 qw();
 
 require Exporter;
 
 our @ISA     = qw(Exporter);
 our @EXPORT  = qw(NameSpace_DNS NameSpace_OID NameSpace_URL NameSpace_X500);
 
-our $VERSION = do { my @v = ('1.3.1' =~ m/\d+/g); sprintf("%d.".("%02d"x$#v), @v); };
+our $VERSION = do { my @v = ('1.3.2' =~ m/\d+/g); sprintf("%d.".("%02d"x$#v), @v); };
 
 sub new {
     my $class = shift;
@@ -52,36 +52,34 @@ sub new {
 
 sub create {
     my ($self) = @_;
-    my $uuid = new OSSP::uuid;
-    $uuid->make("v4");
-    return $uuid->export("bin");
+    my $uuid = OSSP::uuid->new;
+    $uuid->make('v4');
+    return $uuid->export('bin');
 }
 
 sub create_from_name {
     my ($self, $nsid, $name) = @_;
-    my $uuid = new OSSP::uuid;
-    my $nsiduuid = new OSSP::uuid;
-    $nsiduuid->import("bin", $nsiduuid);
-    $uuid = new OSSP::uuid;
-    $uuid->make("v3", $nsiduuid, $name);
-    return $uuid->export("bin");
+    my $uuid = OSSP::uuid->new;
+    my $nsiduuid = OSSP::uuid->new;
+    $nsiduuid->import('bin', $nsiduuid);
+    $uuid = OSSP::uuid->new;
+    $uuid->make('v3', $nsiduuid, $name);
+    return $uuid->export('bin');
 }
 
 sub to_string {
     my ($self, $bin) = @_;
-    my $uuid = new OSSP::uuid;
-    $uuid->import("bin", $bin);
-    return $uuid->export("str");
+    my $uuid = OSSP::uuid->new;
+    $uuid->import('bin', $bin);
+    return $uuid->export('str');
 }
 
 sub to_hexstring {
     my ($self, $bin) = @_;
-    my $uuid = new OSSP::uuid;
-    $uuid->import("bin", $bin);
-    $_ = $uuid->export("str");
-    s/-//g;
-    s/^/0x/;
-    return $_;
+    my $uuid = OSSP::uuid->new;
+    $uuid->import('bin', $bin);
+    (my $string = '0x' . $uuid->export('str')) =~ s/-//g;
+    return $string;
 }
 
 sub to_b64string {
@@ -91,22 +89,20 @@ sub to_b64string {
 
 sub from_string {
     my ($self, $str) = @_;
-    my $uuid = new OSSP::uuid;
-    if ($str =~ /^0x(........)(....)(....)(....)(............)$/) {
-        $str = "$1-$2-$3-$4-$5";
-    }
-    $uuid->import("str", $str);
-    return $uuid->export("bin");
+    my $uuid = OSSP::uuid->new;
+    $uuid->import('str',
+          $str =~ /^0x/
+        ? join '-', unpack('x2 a8 a4 a4 a4 a12', $str)
+        : $str
+    );
+    return $uuid->export('bin');
 }
 
 sub from_hexstring {
     my ($self, $str) = @_;
-    my $uuid = new OSSP::uuid;
-    if ($str =~ /^0x(........)(....)(....)(....)(............)$/) {
-        $str = "$1-$2-$3-$4-$5";
-    }
-    $uuid->import("str", $str);
-    return $uuid->export("bin");
+    my $uuid = OSSP::uuid->new;
+    $uuid->import('str', join '-', unpack('x2 a8 a4 a4 a4 a12', $str));
+    return $uuid->export('bin');
 }
 
 sub from_b64string {
@@ -116,80 +112,64 @@ sub from_b64string {
 
 sub compare {
     my ($self, $bin1, $bin2) = @_;
-    my $uuid1 = new OSSP::uuid;
-    my $uuid2 = new OSSP::uuid;
-    $uuid1->import("bin", $bin1);
-    $uuid2->import("bin", $bin2);
+    my $uuid1 = OSSP::uuid->new;
+    my $uuid2 = OSSP::uuid->new;
+    $uuid1->import('bin', $bin1);
+    $uuid2->import('bin', $bin2);
     return $uuid1->compare($uuid2);
+}
+
+my %NS = (
+    'NameSpace_DNS'  => 'ns:DNS',
+    'NameSpace_URL'  => 'ns:URL',
+    'NameSpace_OID'  => 'ns:OID',
+    'NameSpace_X500' => 'ns:X500',
+);
+
+while (my ($k, $v) = each %NS) {
+    no strict 'refs';
+    *{$k} = sub () {
+        my $uuid = OSSP::uuid->new;
+        $uuid->load($v);
+        return $uuid->export('bin');
+    };
 }
 
 sub constant {
     my ($self, $arg) = @_;
-    my $ns;
-    if    ($arg eq "NameSpace_DNS")  { $ns = "ns:DNS";  }
-    elsif ($arg eq "NameSpace_URL")  { $ns = "ns:URL";  }
-    elsif ($arg eq "NameSpace_X500") { $ns = "ns:X500"; }
-    elsif ($arg eq "NameSpace_OID")  { $ns = "ns:OID";  }
-    else                             { $ns = "nil";     }
-    my $uuid = new OSSP::uuid;
-    $uuid->load($ns);
-    return $uuid->export("bin");
-}
-
-sub NameSpace_DNS {
-    my $self = new Data::UUID;
-    return $self->constant("NameSpace_DNS");
-}
-
-sub NameSpace_URL {
-    my $self = new Data::UUID;
-    return $self->constant("NameSpace_URL");
-}
-
-sub NameSpace_X500 {
-    my $self = new Data::UUID;
-    return $self->constant("NameSpace_X500");
-}
-
-sub NameSpace_OID {
-    my $self = new Data::UUID;
-    return $self->constant("NameSpace_OID");
+    my $uuid = OSSP::uuid->new;
+    $uuid->load($NS{$arg} || 'nil');
+    return $uuid->export('bin');
 }
 
 sub create_str {
-    my ($self) = @_;
-    my $uuid = $self->create();
-    return $self->to_string($uuid);
+    my $self = shift;
+    return $self->to_string($self->create);
 }
 
 sub create_hex {
-    my ($self) = @_;
-    my $uuid = $self->create();
-    return $self->to_hexstring($uuid);
+    my $self = shift;
+    return $self->to_hexstring($self->create);
 }
 
 sub create_b64 {
-    my ($self) = @_;
-    my $uuid = $self->create();
-    return $self->to_b64string($uuid);
+    my $self = shift;
+    return $self->to_b64string($self->create);
 }
 
 sub create_from_name_str {
-    my ($self, $nsid, $name) = @_;
-    my $uuid = $self->create_from_name($nsid, $name);
-    return $self->to_string($uuid);
+    my $self = shift;
+    return $self->to_string($self->create_from_name(@_));
 }
 
 sub create_from_name_hex {
-    my ($self, $nsid, $name) = @_;
-    my $uuid = $self->create_from_name($nsid, $name);
-    return $self->to_hexstring($uuid);
+    my $self = shift;
+    return $self->to_hexstring($self->create_from_name(@_));
 }
 
 sub create_from_name_b64 {
-    my ($self, $nsid, $name) = @_;
-    my $uuid = $self->create_from_name($nsid, $name);
-    return $self->to_b64string($uuid);
+    my $self = shift;
+    return $self->to_b64string($self->create_from_name(@_));
 }
 
 1;
