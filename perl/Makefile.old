@@ -1,7 +1,7 @@
 # This Makefile is for the OSSP::uuid extension to perl.
 #
 # It was generated automatically by MakeMaker version
-# 6.30 (Revision: Revision: 4535 ) from the contents of
+# 6.42 (Revision: 41145) from the contents of
 # Makefile.PL. Don't edit this file, edit Makefile.PL instead.
 #
 #       ANY CHANGES MADE HERE WILL BE LOST!
@@ -29,31 +29,31 @@
 
 # --- MakeMaker const_config section:
 
-# These definitions are from config.sh (via /usr/opkg/lib/perl/5.8.7/i386-freebsd/Config.pm)
+# These definitions are from config.sh (via /usr/opkg/lib/perl/5.10.0/i386-freebsd/Config.pm)
 
 # They may have been overridden via Makefile.PL or on the command line
 AR = ar
-CC = /usr/opkg/bin/cc
+CC = /usr/opkg/bin/gcc
 CCCDLFLAGS = -DPIC -fPIC
 CCDLFLAGS =  
 DLEXT = so
 DLSRC = dl_dlopen.xs
-LD = /usr/opkg/bin/cc
+EXE_EXT = 
+FULL_AR = /usr/opkg/bin/ar
+LD = /usr/opkg/bin/gcc
 LDDLFLAGS = -shared  -Wl,-Bsymbolic
 LDFLAGS = -Wl,-E 
 LIBC = 
 LIB_EXT = .a
 OBJ_EXT = .o
 OSNAME = freebsd
-OSVERS = 5.4-stable
+OSVERS = 6.3-stable
 RANLIB = :
-SITELIBEXP = /usr/opkg/lib/perl/site_perl/5.8.7
-SITEARCHEXP = /usr/opkg/lib/perl/site_perl/5.8.7/i386-freebsd
+SITELIBEXP = /usr/opkg/lib/perl/site_perl/5.10.0
+SITEARCHEXP = /usr/opkg/lib/perl/site_perl/5.10.0/i386-freebsd
 SO = so
-EXE_EXT = 
-FULL_AR = /usr/opkg/bin/ar
-VENDORARCHEXP = /usr/opkg/lib/perl/vendor_perl/5.8.7/i386-freebsd
-VENDORLIBEXP = /usr/opkg/lib/perl/vendor_perl/5.8.7
+VENDORARCHEXP = /usr/opkg/lib/perl/vendor_perl/5.10.0/i386-freebsd
+VENDORLIBEXP = /usr/opkg/lib/perl/vendor_perl/5.10.0
 
 
 # --- MakeMaker constants section:
@@ -62,11 +62,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = OSSP::uuid
 NAME_SYM = OSSP_uuid
-VERSION = 1.0301
+VERSION = 1.0601
 VERSION_MACRO = VERSION
-VERSION_SYM = 1_0301
+VERSION_SYM = 1_0601
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 1.0301
+XS_VERSION = 1.0601
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -83,17 +83,17 @@ PREFIX = /tmp/uuid
 PERLPREFIX = $(PREFIX)
 SITEPREFIX = $(PREFIX)
 VENDORPREFIX = $(PREFIX)
-INSTALLPRIVLIB = $(PERLPREFIX)/lib/perl/5.8.7
+INSTALLPRIVLIB = $(PERLPREFIX)/lib/perl/5.10.0
 DESTINSTALLPRIVLIB = $(DESTDIR)$(INSTALLPRIVLIB)
-INSTALLSITELIB = $(SITEPREFIX)/lib/perl/site_perl/5.8.7
+INSTALLSITELIB = $(SITEPREFIX)/lib/perl/site_perl/5.10.0
 DESTINSTALLSITELIB = $(DESTDIR)$(INSTALLSITELIB)
-INSTALLVENDORLIB = $(VENDORPREFIX)/lib/perl/vendor_perl/5.8.7
+INSTALLVENDORLIB = $(VENDORPREFIX)/lib/perl/vendor_perl/5.10.0
 DESTINSTALLVENDORLIB = $(DESTDIR)$(INSTALLVENDORLIB)
-INSTALLARCHLIB = $(PERLPREFIX)/lib/perl/5.8.7/i386-freebsd
+INSTALLARCHLIB = $(PERLPREFIX)/lib/perl/5.10.0/i386-freebsd
 DESTINSTALLARCHLIB = $(DESTDIR)$(INSTALLARCHLIB)
-INSTALLSITEARCH = $(SITEPREFIX)/lib/perl/site_perl/5.8.7/i386-freebsd
+INSTALLSITEARCH = $(SITEPREFIX)/lib/perl/site_perl/5.10.0/i386-freebsd
 DESTINSTALLSITEARCH = $(DESTDIR)$(INSTALLSITEARCH)
-INSTALLVENDORARCH = $(VENDORPREFIX)/lib/perl/vendor_perl/5.8.7/i386-freebsd
+INSTALLVENDORARCH = $(VENDORPREFIX)/lib/perl/vendor_perl/5.10.0/i386-freebsd
 DESTINSTALLVENDORARCH = $(DESTDIR)$(INSTALLVENDORARCH)
 INSTALLBIN = $(PERLPREFIX)/bin
 DESTINSTALLBIN = $(DESTDIR)$(INSTALLBIN)
@@ -103,6 +103,10 @@ INSTALLVENDORBIN = $(VENDORPREFIX)/bin
 DESTINSTALLVENDORBIN = $(DESTDIR)$(INSTALLVENDORBIN)
 INSTALLSCRIPT = $(PERLPREFIX)/bin
 DESTINSTALLSCRIPT = $(DESTDIR)$(INSTALLSCRIPT)
+INSTALLSITESCRIPT = $(SITEPREFIX)/bin
+DESTINSTALLSITESCRIPT = $(DESTDIR)$(INSTALLSITESCRIPT)
+INSTALLVENDORSCRIPT = $(VENDORPREFIX)/bin
+DESTINSTALLVENDORSCRIPT = $(DESTDIR)$(INSTALLVENDORSCRIPT)
 INSTALLMAN1DIR = $(PERLPREFIX)/man/man1
 DESTINSTALLMAN1DIR = $(DESTDIR)$(INSTALLMAN1DIR)
 INSTALLSITEMAN1DIR = $(SITEPREFIX)/man/man1
@@ -115,14 +119,14 @@ INSTALLSITEMAN3DIR = $(SITEPREFIX)/man/man3
 DESTINSTALLSITEMAN3DIR = $(DESTDIR)$(INSTALLSITEMAN3DIR)
 INSTALLVENDORMAN3DIR = $(VENDORPREFIX)/man/man3
 DESTINSTALLVENDORMAN3DIR = $(DESTDIR)$(INSTALLVENDORMAN3DIR)
-PERL_LIB = /usr/opkg/lib/perl/5.8.7
-PERL_ARCHLIB = /usr/opkg/lib/perl/5.8.7/i386-freebsd
+PERL_LIB = /usr/opkg/lib/perl/5.10.0
+PERL_ARCHLIB = /usr/opkg/lib/perl/5.10.0/i386-freebsd
 LIBPERL_A = libperl.a
 FIRST_MAKEFILE = Makefile
 MAKEFILE_OLD = Makefile.old
 MAKE_APERL_FILE = Makefile.aperl
 PERLMAINCC = $(CC)
-PERL_INC = /usr/opkg/lib/perl/5.8.7/i386-freebsd/CORE
+PERL_INC = /usr/opkg/lib/perl/5.10.0/i386-freebsd/CORE
 PERL = /usr/opkg/bin/perl
 FULLPERL = /usr/opkg/bin/perl
 ABSPERL = $(PERL)
@@ -136,14 +140,15 @@ PERL_CORE = 0
 PERM_RW = 644
 PERM_RWX = 755
 
-MAKEMAKER   = /usr/opkg/lib/perl/vendor_perl/5.8.7/ExtUtils/MakeMaker.pm
-MM_VERSION  = 6.30
-MM_REVISION = Revision: 4535 
+MAKEMAKER   = /usr/opkg/lib/perl/vendor_perl/5.10.0/ExtUtils/MakeMaker.pm
+MM_VERSION  = 6.42
+MM_REVISION = 41145
 
 # FULLEXT = Pathname for extension directory (eg Foo/Bar/Oracle).
 # BASEEXT = Basename part of FULLEXT. May be just equal FULLEXT. (eg Oracle)
 # PARENT_NAME = NAME without BASEEXT and no trailing :: (eg Foo::Bar)
 # DLBASE  = Basename part of dynamic library. May be just equal BASEEXT.
+MAKE = make
 FULLEXT = OSSP/uuid
 BASEEXT = uuid
 PARENT_NAME = OSSP
@@ -201,24 +206,24 @@ PM_TO_BLIB = uuid.pod \
 
 
 # --- MakeMaker platform_constants section:
-MM_Unix_VERSION = 1.50
+MM_Unix_VERSION = 6.42
 PERL_MALLOC_DEF = -DPERL_EXTMALLOC_DEF -Dmalloc=Perl_malloc -Dfree=Perl_mfree -Drealloc=Perl_realloc -Dcalloc=Perl_calloc
 
 
 # --- MakeMaker tool_autosplit section:
 # Usage: $(AUTOSPLITFILE) FileToSplit AutoDirToSplitInto
-AUTOSPLITFILE = $(ABSPERLRUN)  -e 'use AutoSplit;  autosplit($$ARGV[0], $$ARGV[1], 0, 1, 1)'
+AUTOSPLITFILE = $(ABSPERLRUN)  -e 'use AutoSplit;  autosplit($$ARGV[0], $$ARGV[1], 0, 1, 1)' --
 
 
 
 # --- MakeMaker tool_xsubpp section:
 
-XSUBPPDIR = /usr/opkg/lib/perl/5.8.7/ExtUtils
+XSUBPPDIR = /usr/opkg/lib/perl/5.10.0/ExtUtils
 XSUBPP = $(XSUBPPDIR)$(DFSEP)xsubpp
 XSUBPPRUN = $(PERLRUN) $(XSUBPP)
 XSPROTOARG = 
-XSUBPPDEPS = /usr/opkg/lib/perl/5.8.7/ExtUtils/typemap uuid.tm $(XSUBPP)
-XSUBPPARGS = -typemap /usr/opkg/lib/perl/5.8.7/ExtUtils/typemap -typemap uuid.tm
+XSUBPPDEPS = /usr/opkg/lib/perl/5.10.0/ExtUtils/typemap uuid.tm $(XSUBPP)
+XSUBPPARGS = -typemap /usr/opkg/lib/perl/5.10.0/ExtUtils/typemap -typemap uuid.tm
 XSUBPP_EXTRA_ARGS = 
 
 
@@ -241,7 +246,7 @@ ECHO = echo
 ECHO_N = echo -n
 UNINST = 0
 VERBINST = 0
-MOD_INSTALL = $(ABSPERLRUN) -MExtUtils::Install -e 'install({@ARGV}, '\''$(VERBINST)'\'', 0, '\''$(UNINST)'\'');'
+MOD_INSTALL = $(ABSPERLRUN) -MExtUtils::Install -e 'install({@ARGV}, '\''$(VERBINST)'\'', 0, '\''$(UNINST)'\'');' --
 DOC_INSTALL = $(ABSPERLRUN) "-MExtUtils::Command::MM" -e perllocal_install
 UNINSTALL = $(ABSPERLRUN) "-MExtUtils::Command::MM" -e uninstall
 WARN_IF_OLD_PACKLIST = $(ABSPERLRUN) "-MExtUtils::Command::MM" -e warn_if_old_packlist
@@ -252,7 +257,7 @@ FIXIN = $(PERLRUN) "-MExtUtils::MY" -e "MY->fixin(shift)"
 
 
 # --- MakeMaker makemakerdflt section:
-makemakerdflt: all
+makemakerdflt : all
 	$(NOECHO) $(NOOP)
 
 
@@ -272,7 +277,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = OSSP-uuid
-DISTVNAME = OSSP-uuid-1.0301
+DISTVNAME = OSSP-uuid-1.0601
 
 
 # --- MakeMaker macro section:
@@ -328,7 +333,7 @@ PASTHRU = LIBPERL_A="$(LIBPERL_A)"\
 # --- MakeMaker c_o section:
 
 .c.i:
-	/usr/opkg/bin/cc -E -c $(PASTHRU_INC) $(INC) \
+	/usr/opkg/bin/gcc -E -c $(PASTHRU_INC) $(INC) \
 	$(CCFLAGS) $(OPTIMIZE) \
 	$(PERLTYPE) $(MPOLLUTE) $(DEFINE_VERSION) \
 	$(XS_DEFINE_VERSION) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.c > $*.i
@@ -339,9 +344,6 @@ PASTHRU = LIBPERL_A="$(LIBPERL_A)"\
 .c$(OBJ_EXT):
 	$(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.c
 
-.C$(OBJ_EXT):
-	$(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.C
-
 .cpp$(OBJ_EXT):
 	$(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.cpp
 
@@ -350,6 +352,9 @@ PASTHRU = LIBPERL_A="$(LIBPERL_A)"\
 
 .cc$(OBJ_EXT):
 	$(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.cc
+
+.C$(OBJ_EXT):
+	$(CCCMD) $*.C
 
 
 # --- MakeMaker xs_c section:
@@ -510,8 +515,6 @@ POD2MAN = $(POD2MAN_EXE)
 
 manifypods : pure_all  \
 	uuid.pod \
-	uuid_compat.pod \
-	uuid.pod \
 	uuid_compat.pod
 	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) \
 	  uuid.pod $(INST_MAN3DIR)/OSSP::uuid.3 \
@@ -578,7 +581,7 @@ realclean purge ::  clean realclean_subdirs
 
 
 # --- MakeMaker metafile section:
-metafile:
+metafile :
 	$(NOECHO) $(NOOP)
 
 
@@ -601,7 +604,7 @@ manifest :
 	$(PERLRUN) "-MExtUtils::Manifest=mkmanifest" -e mkmanifest
 
 veryclean : realclean
-	$(RM_F) *~ *.orig */*~ */*.orig
+	$(RM_F) *~ */*~ *.orig */*.orig *.bak */*.bak *.old */*.old 
 
 
 
@@ -609,7 +612,7 @@ veryclean : realclean
 
 dist : $(DIST_DEFAULT) $(FIRST_MAKEFILE)
 	$(NOECHO) $(ABSPERLRUN) -l -e 'print '\''Warning: Makefile possibly out of date with $(VERSION_FROM)'\''' \
-	  -e '    if -e '\''$(VERSION_FROM)'\'' and -M '\''$(VERSION_FROM)'\'' < -M '\''$(FIRST_MAKEFILE)'\'';'
+	  -e '    if -e '\''$(VERSION_FROM)'\'' and -M '\''$(VERSION_FROM)'\'' < -M '\''$(FIRST_MAKEFILE)'\'';' --
 
 tardist : $(DISTVNAME).tar$(SUFFIX)
 	$(NOECHO) $(NOOP)
@@ -672,14 +675,14 @@ ci :
 # --- MakeMaker distmeta section:
 distmeta : create_distdir metafile
 	$(NOECHO) cd $(DISTVNAME) && $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e 'eval { maniadd({q{META.yml} => q{Module meta-data (added by MakeMaker)}}) } ' \
-	  -e '    or print "Could not add META.yml to MANIFEST: $${'\''@'\''}\n"'
+	  -e '    or print "Could not add META.yml to MANIFEST: $${'\''@'\''}\n"' --
 
 
 
 # --- MakeMaker distsignature section:
 distsignature : create_distdir
 	$(NOECHO) cd $(DISTVNAME) && $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e 'eval { maniadd({q{SIGNATURE} => q{Public-key signature (added by MakeMaker)}}) } ' \
-	  -e '    or print "Could not add SIGNATURE to MANIFEST: $${'\''@'\''}\n"'
+	  -e '    or print "Could not add SIGNATURE to MANIFEST: $${'\''@'\''}\n"' --
 	$(NOECHO) cd $(DISTVNAME) && $(TOUCH) SIGNATURE
 	cd $(DISTVNAME) && cpansign -s
 
@@ -732,7 +735,7 @@ pure_site_install ::
 		$(INST_LIB) $(DESTINSTALLSITELIB) \
 		$(INST_ARCHLIB) $(DESTINSTALLSITEARCH) \
 		$(INST_BIN) $(DESTINSTALLSITEBIN) \
-		$(INST_SCRIPT) $(DESTINSTALLSCRIPT) \
+		$(INST_SCRIPT) $(DESTINSTALLSITESCRIPT) \
 		$(INST_MAN1DIR) $(DESTINSTALLSITEMAN1DIR) \
 		$(INST_MAN3DIR) $(DESTINSTALLSITEMAN3DIR)
 	$(NOECHO) $(WARN_IF_OLD_PACKLIST) \
@@ -745,7 +748,7 @@ pure_vendor_install ::
 		$(INST_LIB) $(DESTINSTALLVENDORLIB) \
 		$(INST_ARCHLIB) $(DESTINSTALLVENDORARCH) \
 		$(INST_BIN) $(DESTINSTALLVENDORBIN) \
-		$(INST_SCRIPT) $(DESTINSTALLSCRIPT) \
+		$(INST_SCRIPT) $(DESTINSTALLVENDORSCRIPT) \
 		$(INST_MAN1DIR) $(DESTINSTALLVENDORMAN1DIR) \
 		$(INST_MAN3DIR) $(DESTINSTALLVENDORMAN3DIR)
 
@@ -798,7 +801,7 @@ uninstall_from_vendordirs ::
 
 # --- MakeMaker force section:
 # Phony target to force checking subdirectories.
-FORCE:
+FORCE :
 	$(NOECHO) $(NOOP)
 
 
@@ -843,7 +846,6 @@ PERL_HDRS = \
 	$(PERL_INC)/regnodes.h		\
 	$(PERL_INC)/scope.h		\
 	$(PERL_INC)/sv.h		\
-	$(PERL_INC)/thrdvar.h		\
 	$(PERL_INC)/thread.h		\
 	$(PERL_INC)/unixish.h		\
 	$(PERL_INC)/util.h
@@ -900,7 +902,11 @@ TESTDB_SW = -d
 
 testdb :: testdb_$(LINKTYPE)
 
-test :: $(TEST_TYPE)
+test :: $(TEST_TYPE) subdirs-test
+
+subdirs-test ::
+	$(NOECHO) $(NOOP)
+
 
 test_dynamic :: pure_all
 	PERL_DL_NONLAZY=1 $(FULLPERLRUN) "-MExtUtils::Command::MM" "-e" "test_harness($(TEST_VERBOSE), '$(INST_LIB)', '$(INST_ARCHLIB)')" $(TEST_FILES)
@@ -920,14 +926,14 @@ testdb_static :: pure_all $(MAP_TARGET)
 
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
-ppd:
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="1,0301,0,0">' > $(DISTNAME).ppd
+ppd :
+	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="1,0601,0,0">' > $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <TITLE>$(DISTNAME)</TITLE>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <ABSTRACT>B&lt;OSSP uuid&gt; Perl Binding</ABSTRACT>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <AUTHOR></AUTHOR>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <OS NAME="$(OSNAME)" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="i386-freebsd" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="i386-freebsd-5.1" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '</SOFTPKG>' >> $(DISTNAME).ppd
@@ -936,7 +942,7 @@ ppd:
 # --- MakeMaker pm_to_blib section:
 
 pm_to_blib : $(TO_INST_PM)
-	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', '\''$(PM_FILTER)'\'')' \
+	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', '\''$(PM_FILTER)'\'')' -- \
 	  uuid.pod $(INST_LIBDIR)/uuid.pod \
 	  uuid_compat.pm $(INST_LIBDIR)/../Data/UUID.pm \
 	  uuid.pm $(INST_LIBDIR)/uuid.pm \

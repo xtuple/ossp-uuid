@@ -24,31 +24,35 @@
 **  OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 **  SUCH DAMAGE.
 **
-**  uuid_mac.h: Media Access Control (MAC) resolver API definition
+**  uuid_time.h: Time Management API
 */
 
-#ifndef __UUID_MAC_H__
-#define __UUID_MAC_H__
+#ifndef __UUID_TIME_H__
+#define __UUID_TIME_H__
 
-#include <string.h> /* size_t */
+#include "uuid_ac.h"
 
-#define MAC_PREFIX uuid_
-
-/* embedding support */
-#ifdef MAC_PREFIX
-#if defined(__STDC__) || defined(__cplusplus)
-#define __MAC_CONCAT(x,y) x ## y
-#define MAC_CONCAT(x,y) __MAC_CONCAT(x,y)
-#else
-#define __MAC_CONCAT(x) x
-#define MAC_CONCAT(x,y) __MAC_CONCAT(x)y
+#if defined(WIN32)
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
 #endif
-#define mac_address MAC_CONCAT(MAC_PREFIX,mac_address)
+#include <time.h>
+#ifdef HAVE_SYS_TIME_H
+#include <sys/time.h>
+#endif
+#ifdef HAVE_SYS_TYPES_H
+#include <sys/types.h>
 #endif
 
-#define MAC_LEN 6
+#ifndef HAVE_STRUCT_TIMEVAL
+struct timeval { long tv_sec; long tv_usec; };
+#endif
+#ifndef HAVE_STRUCT_TIMEZONE
+struct timezone { int tz_minuteswest; int tz_dsttime; };
+#endif
 
-extern int mac_address(unsigned char *_data_ptr, size_t _data_len);
+extern int time_gettimeofday(struct timeval *, struct timezone *);
+extern int time_usleep(long usec);
 
-#endif /* __UUID_MAC_H__ */
+#endif /* __UUID_TIME_H__ */
 
